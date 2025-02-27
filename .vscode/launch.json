@@ -1,0 +1,156 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    
+    {
+      "name": "server 8000 django python",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": [
+        "runserver"
+      ],
+      "django": true
+    },
+    {
+      "name": "chrome 8000 with npm build",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:8000",
+      "webRoot": "${workspaceFolder}/frontend/src",
+      "sourceMaps": true,
+      "preLaunchTask": "npm: build"
+    },
+    {
+      "name": "chrome 8000",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:8000",
+      "webRoot": "${workspaceFolder}/frontend/src",
+      "sourceMaps": true,
+    },
+    {
+      "name": "chrome 3000 with npm start",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/frontend/src",
+      "sourceMaps": true,
+    },
+    {
+      "name": "server 3000 react npm start",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "start"
+      ],
+      "cwd": "${workspaceFolder}/frontend",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Next.js: debug server-side",
+      "type": "node-terminal",
+      "cwd": "${workspaceFolder}/nextjs",
+      "request": "launch",
+      "command": "npm run dev"
+    },
+    {
+      "name": "Next.js: debug client-side",
+      "type": "chrome",
+      "cwd": "${workspaceFolder}/nextjs",
+      "request": "launch",
+      "url": "http://localhost:3000"
+    },
+    {
+      "name": "Next.js: debug client-side (Firefox)",
+      "type": "firefox",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "reAttach": true,
+      "pathMappings": [
+        {
+          "url": "webpack://_N_E",
+          "path": "${workspaceFolder}/nextjs"
+        }
+      ]
+    },
+    {
+      "name": "Next.js: debug full stack",
+      "type": "node-terminal",
+      "cwd": "${workspaceFolder}/nextjs",
+      "request": "launch",
+      "command": "npm run dev --inspect",
+      // "program": "${workspaceFolder}/node_modules/.bin/next",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "env": {
+        "FRONT_ENV": "debug nope xd"
+      },
+      "serverReadyAction": {
+        "action": "debugWithChrome",
+        "killOnServerStop": true,
+        "pattern": "- Local:.+(https?://.+)",
+        "uriFormat": "%s",
+        "webRoot": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Next.js: Debug Server-Side",
+      "type": "node-terminal",
+      "cwd": "${workspaceFolder}/nextjs",
+      "request": "launch",
+      "command": "npm run dev --inspect",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+    },
+    {
+      "name": "Next.js: Debug Client-Side (Firefox)",
+      "type": "firefox",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}",
+      "reAttach": true,
+      "pathMappings": [
+        {
+          "url": "webpack://_N_E/",
+          "path": "${workspaceFolder}/nextjs"
+        }
+      ]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug server and frontend with mpm build",
+      "configurations": [
+        "server 8000 django python",
+        "chrome 8000 with npm build",
+      ]
+    },
+    {
+      "name": "Debug server and frontend",
+      "configurations": [
+        "server 8000 django python",
+        "chrome 8000",
+      ]
+    },
+    {
+      "name": "Debug frontend",
+      "configurations": [
+        "server 3000 react npm start",
+        "chrome 3000 with npm start",
+      ]
+    },
+    {
+      "name": "Debug Full Stack",
+      "configurations": [
+        "Next.js: Debug Server-Side",
+        "Next.js: Debug Client-Side (Firefox)"
+      ],
+      "stopAll": true
+    }
+  ]
+}
